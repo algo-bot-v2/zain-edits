@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ZE TOURNAMENTS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* RESET & BODY */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Rajdhani',sans-serif;}
+body{background:#0d0d0d;color:#fff;overflow-x:hidden;}
+
+/* COLORS */
+:root{
+ --primary:#ff4b00; /* Bold orange-red */
+ --secondary:#00ffe4; /* Cyan accent */
+ --panel:#1a1a1a;     /* Cards background */
+ --btn-gradient: linear-gradient(45deg, #ff4b00, #ffcd00);
+ --btn-gradient-hover: linear-gradient(45deg, #ff6b2e, #ffe034);
+}
+
+/* LOGIN */
+#login-page{
+ height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:#0d0d0d;
+}
+.login-box{
+ background:#1a1a1a;
+ width:360px;
+ padding:30px;
+ border-radius:12px;
+ text-align:center;
+ box-shadow:0 0 30px var(--primary);
+}
+.login-box h1{
+ font-family:'Orbitron';
+ color:var(--primary);
+ font-size:28px;
+ margin-bottom:20px;
+ letter-spacing:2px;
+ text-shadow:0 0 10px var(--primary);
+}
+.login-box input{
+ width:100%;
+ padding:12px;
+ margin:10px 0;
+ border-radius:8px;
+ border:1px solid #333;
+ background:#222;
+ color:#fff;
+ font-size:15px;
+}
+.login-btn{
+ width:100%;
+ padding:12px;
+ margin-top:10px;
+ border:none;
+ border-radius:8px;
+ background:var(--btn-gradient);
+ color:#000;
+ font-weight:700;
+ font-size:16px;
+ cursor:pointer;
+ transition:0.3s;
+}
+.login-btn:hover{background:var(--btn-gradient-hover);}
+
+/* SPLASH */
+#splash{
+ display:none;
+ height:100vh;
+ background:#0d0d0d;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+}
+.splash-text{
+ font-family:'Orbitron';
+ font-size:46px;
+ color:var(--primary);
+ letter-spacing:3px;
+ animation:glow 1.2s infinite alternate;
+}
+@keyframes glow{
+ from{text-shadow:0 0 10px var(--primary);}
+ to{text-shadow:0 0 30px var(--secondary);}
+}
+
+/* DASHBOARD */
+#dashboard{
+ display:none;
+ padding:20px;
+}
+.topbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:14px 18px;
+ background:#1a1a1a;
+ border-radius:12px;
+ margin-bottom:15px;
+ box-shadow:0 0 15px var(--primary);
+}
+.brand{
+ font-family:'Orbitron';
+ font-size:24px;
+ color:var(--primary);
+ font-weight:bold;
+}
+.card{
+ background:#1a1a1a;
+ padding:18px;
+ border-radius:12px;
+ margin:14px 0;
+ box-shadow:0 0 12px var(--secondary);
+}
+h2{
+ color:var(--primary);
+ margin-bottom:12px;
+ font-family:'Orbitron';
+ font-weight:bold;
+}
+.btn{
+ padding:8px 14px;
+ border:none;
+ border-radius:8px;
+ font-weight:700;
+ cursor:pointer;
+ background:var(--btn-gradient);
+ color:#000;
+ transition:0.3s;
+}
+.btn:hover{background:var(--btn-gradient-hover);}
+.tournament-item{
+ background:#222;
+ padding:16px;
+ border-radius:10px;
+ margin:10px 0;
+ box-shadow:0 0 10px var(--secondary);
+ color:#fff;
+}
+.tournament-item b{color:var(--primary);}
+.contact{
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+}
+.contact img{
+ width:22px;
+ height:22px;
+ vertical-align:middle;
+ margin-right:8px;
+}
+
+/* MAINTENANCE OVERLAY */
+#maintOverlay{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.95);
+ color:var(--primary);
+ font-family:'Orbitron',sans-serif;
+ font-size:34px;
+ font-weight:700;
+ text-align:center;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ z-index:9999;
+ opacity:0;
+ transition:opacity 0.8s ease-in-out;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-page">
+ <div class="login-box">
+   <h1>ZE TOURNAMENTS</h1>
+   <input id="user" placeholder="Username">
+   <input id="pass" type="password" placeholder="Password">
+   <button class="login-btn" onclick="login()">Login</button>
+   <p style="margin-top:10px;color:#bbb;font-size:13px">
+     Demo: <b>demo</b> / <b>fia</b>
+   </p>
+ </div>
+</div>
+
+<!-- SPLASH -->
+<div id="splash">
+ <div class="splash-text">ZE TOURNAMENTS</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+ <div class="topbar">
+   <div class="brand">ZE TOURNAMENTS</div>
+   <button class="btn" onclick="logout()">LOGOUT</button>
+ </div>
+
+ <!-- Announcements -->
+ <div class="card">
+   <h2>Announcements</h2>
+   <p>Welcome to ZE Tournaments – Free Fire Battles Live!</p>
+ </div>
+
+ <!-- Tournaments -->
+ <div class="card">
+   <h2>Upcoming Tournaments</h2>
+
+   <div class="tournament-item">
+     <b>Squad Royale</b><br>
+     Prize: ₹2000 • Type: Squad • Date: 10 Aug 2025<br>
+     Rules: No Emulator • No Hacking • No Teaming<br>
+     <button class="btn" onclick="showMaintenance()">Register</button>
+   </div>
+
+   <div class="tournament-item">
+     <b>Duo Battle</b><br>
+     Prize: ₹1500 • Type: Duo • Date: 15 Aug 2025<br>
+     Rules: No Emulator • No Hacking<br>
+     <button class="btn" onclick="showMaintenance()">Register</button>
+   </div>
+
+   <div class="tournament-item">
+     <b>Solo Frenzy</b><br>
+     Prize: ₹1000 • Type: Solo • Date: 20 Aug 2025<br>
+     Rules: Fair Play Only<br>
+     <button class="btn" onclick="showMaintenance()">Register</button>
+   </div>
+
+   <div class="tournament-item">
+     <b>Elite Clash</b><br>
+     Prize: ₹3000 • Type: Squad • Date: 25 Aug 2025<br>
+     Rules: No Teaming • No Hacks<br>
+     <button class="btn" onclick="showMaintenance()">Register</button>
+   </div>
+
+ </div>
+
+ <!-- Contact Us -->
+ <div class="card">
+   <h2>Contact Us</h2>
+   <div class="contact">
+     <div><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email"> Email: support@zetournaments.com</div>
+     <div><img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="phone"> Phone: +91-9876543210</div>
+     <div><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="insta"> Instagram: <a href="https://instagram.com/zetournaments" target="_blank">@zetournaments</a></div>
+     <div><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="fb"> Facebook: <a href="https://facebook.com/zetournaments" target="_blank">ZE Tournaments</a></div>
+   </div>
+ </div>
+</div>
+
+<!-- MAINTENANCE OVERLAY -->
+<div id="maintOverlay">WEBSITE IS UNDER MAINTENANCE</div>
+
+<script>
+function login(){
+ let u=document.getElementById("user").value;
+ let p=document.getElementById("pass").value;
+ if(u==="demo" && p==="fia"){
+   document.getElementById("login-page").style.display="none";
+   document.getElementById("splash").style.display="flex";
+   setTimeout(()=>{
+     document.getElementById("splash").style.display="none";
+     document.getElementById("dashboard").style.display="block";
+   },1500);
+ } else { alert("Wrong username or password!"); }
+}
+
+function logout(){
+ document.getElementById("dashboard").style.display="none";
+ document.getElementById("login-page").style.display="flex";
+}
+
+function showMaintenance(){
+ const overlay=document.getElementById('maintOverlay');
+ overlay.style.display='flex';
+ setTimeout(()=>{ overlay.style.opacity=1; },50);
+ setTimeout(()=>{
+   overlay.style.opacity=0;
+   setTimeout(()=>{ overlay.style.display='none'; },800);
+ },2000);
+}
+</script>
+</body>
+</html>
